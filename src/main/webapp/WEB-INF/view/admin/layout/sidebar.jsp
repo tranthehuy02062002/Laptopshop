@@ -28,7 +28,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Minh Phương
+                    Admin
                 </div>
             </nav>
         </div>

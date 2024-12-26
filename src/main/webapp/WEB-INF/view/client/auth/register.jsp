@@ -1,116 +1,147 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-            <!DOCTYPE html>
-            <html lang="en">
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+        <!DOCTYPE html>
+        <html lang="en">
 
-            <head>
-                <meta charset="utf-8" />
-                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                <meta name="description" content="" />
-                <meta name="author" content="" />
-                <title>Register - Laptopshop</title>
-                <link href="/css/styles.css" rel="stylesheet" />
-                <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-            </head>
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+            <title>Register - Laptopshop</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f8f9fa;
+                    margin: 0;
+                    padding: 0;
+                }
 
-            <body class="bg-primary">
-                <div id="layoutAuthentication">
-                    <div id="layoutAuthentication_content">
-                        <main>
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-7">
-                                        <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                            <div class="card-header">
-                                                <h3 class="text-center font-weight-light my-4">Create Account</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <form:form method="post" action="/register"
-                                                    modelAttribute="registerUser">
-                                                    <c:set var="errorPassword">
-                                                        <form:errors path="confirmPassword"
-                                                            cssClass="invalid-feedback" />
-                                                    </c:set>
-                                                    <c:set var="errorEmail">
-                                                        <form:errors path="email" cssClass="invalid-feedback" />
-                                                    </c:set>
+                /* General styles */
+                .register-container {
+                    display: flex;
+                    height: 100vh;
+                    align-items: center;
+                    justify-content: center;
+                }
 
-                                                    <c:set var="errorFirstName">
-                                                        <form:errors path="firstName" cssClass="invalid-feedback" />
-                                                    </c:set>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input
-                                                                    class="form-control ${not empty errorFirstName ? 'is-invalid' : ''}"
-                                                                    type="text" placeholder="Enter your first name"
-                                                                    path="firstName" />
-                                                                <label for="inputFirstName">First name</label>
-                                                                ${errorFirstName}
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating">
-                                                                <form:input class="form-control" type="text"
-                                                                    placeholder="Enter your last name"
-                                                                    path="lastName" />
-                                                                <label for="inputLastName">Last name</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-floating mb-3">
-                                                        <form:input
-                                                            class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
-                                                            type="email" placeholder="name@example.com" path="email" />
-                                                        <label>Email address</label>
-                                                        ${errorEmail}
-                                                    </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input
-                                                                    class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
-                                                                    type="password" placeholder="Create a password"
-                                                                    path="password" />
-                                                                <label>Password</label>
-                                                                ${errorPassword}
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input class="form-control" type="password"
-                                                                    placeholder="Confirm password"
-                                                                    path="confirmPassword" />
-                                                                <label>Confirm Password</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-4 mb-0">
-                                                        <div class="d-grid">
-                                                            <button class="btn btn-primary btn-block">
-                                                                Create Account
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </form:form>
-                                            </div>
-                                            <div class="card-footer text-center py-3">
-                                                <div class="small"><a href="/login">Have an account? Go to login</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                .register-card {
+                    display: flex;
+                    width: 900px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    border-radius: 10px;
+                    overflow: hidden;
+                }
+
+                /* Left Section */
+                .left-section {
+                    flex: 1;
+                    background: #fff;
+                    padding: 2rem;
+                }
+
+                /* Right Section: Gradient background */
+                .gradient-section {
+                    background: linear-gradient(to right, #ff7e5f, #ff6a99);
+                    color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    padding: 2rem;
+                }
+
+                /* Input Styling */
+                .form-control {
+                    border: 2px solid #ddd;
+                    border-radius: 20px;
+                    padding: 12px 15px;
+                    font-size: 14px;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                .form-control:focus {
+                    border-color: #ff7e5f;
+                    box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
+                    outline: none;
+                }
+
+                /* Button Styling */
+                .btn-custom {
+                    background: linear-gradient(to right, #ff7e5f, #ff6a99);
+                    border: none;
+                    color: white;
+                    border-radius: 20px;
+                    padding: 10px;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                .btn-custom:hover {
+                    background: linear-gradient(to left, #ff7e5f, #ff6a99);
+                }
+
+                /* Responsive Padding */
+                @media (max-width: 768px) {
+                    .register-card {
+                        flex-direction: column;
+                    }
+                }
+            </style>
+        </head>
+
+        <body>
+            <div class="register-container">
+                <div class="register-card">
+                    <!-- Left Section: Register Form -->
+                    <div class="left-section">
+                        <h3 class="text-center mb-4">Create Account</h3>
+                        <form:form method="post" action="/register" modelAttribute="registerUser">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <form:input path="firstName" class="form-control"
+                                        placeholder="Enter your first name" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <form:input path="lastName" class="form-control"
+                                        placeholder="Enter your last name" />
                                 </div>
                             </div>
-                        </main>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <form:input path="email" class="form-control" placeholder="name@example.com" />
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="password" class="form-label">Password</label>
+                                    <form:input path="password" type="password" class="form-control"
+                                        placeholder="Enter password" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <form:input path="confirmPassword" type="password" class="form-control"
+                                        placeholder="Confirm password" />
+                                </div>
+                            </div>
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-custom btn-block">Create Account</button>
+                            </div>
+                        </form:form>
+                        <div class="text-center mt-3">
+                            <small>Already have an account? <a href="/login" class="text-decoration-none">Go to
+                                    Login</a></small>
+                        </div>
                     </div>
 
+                    <!-- Right Section: Gradient Section -->
+                    <div class="gradient-section">
+                        <h2>Welcome to Register</h2>
+                        <p>Join us and get started!</p>
+                        <a href="/login" class="btn btn-outline-light mt-3 rounded-pill">Sign In</a>
+                    </div>
                 </div>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-                    crossorigin="anonymous"></script>
-                <script src="/js/scripts.js"></script>
-            </body>
+            </div>
+        </body>
 
-            </html>
+        </html>

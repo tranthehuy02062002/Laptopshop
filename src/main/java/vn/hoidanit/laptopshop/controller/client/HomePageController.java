@@ -54,6 +54,12 @@ public class HomePageController {
         return "client/homepage/show";
     }
 
+    // @GetMapping("/register")
+    // public String getRegisterPage(Model model) {
+    //     model.addAttribute("registerUser", new RegisterDTO());
+    //     return "client/auth/register";
+    // }
+
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
         model.addAttribute("registerUser", new RegisterDTO());
@@ -81,6 +87,12 @@ public class HomePageController {
         return "redirect:/login";
 
     }
+
+    // @GetMapping("/login")
+    // public String getLoginPage(Model model) {
+
+    //     return "client/auth/login";
+    // }
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
